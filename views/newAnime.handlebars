@@ -1,0 +1,60 @@
+{{> jumbotron titulo='Agrega un nuevo animé' descripcion='Usa el formulario para rellenar los datos del nuevo animé'}}
+<section class='container w-50'>
+    <form id='formAgregarAnime'>
+        <label class='form-label' for='animeNombre'>
+            Nombre
+        </label>
+        <input class='form-control mb-3' type='text' name='animeNombre' id='animeNombre' required />
+
+        <label class='form-label' for='animeGenero'>
+            Genero
+        </label>
+        <input class='form-control mb-3' type='text' name='animeGenero' id='animeGenero' required />
+        <label class='form-label' for='animeYear'>
+            Año
+        </label>
+        <input class='form-control mb-3' type='text' name='animeYear' id='animeYear' required />
+
+        <label class='form-label' for='animeAutor'>
+            Autor
+        </label>
+        <input class='form-control mb-3' type='text' name='animeAutor' id='animeAutor' required />
+        <div class='d-grid'>
+            <button class='btn btn-outline-primary' type='submit'>
+                Agregar
+            </button>
+        </div>
+    </form>
+</section>
+
+<script>
+    const formAgregar = document.getElementById('formAgregarAnime');
+    formAgregar.addEventListener('submit', async (event) => {
+        event.preventDefault(); var myHeaders = new Headers(); try {
+            myHeaders.append("Content-Type", "application/json"); 
+            const raw = JSON.stringify({
+                    "nombre": animeNombre.value, 
+                    "genero": animeGenero.value, 
+                    "year": animeYear.value, 
+                    "autor": animeAutor.value
+                }); 
+            const requestOptions = {
+                method:'POST', 
+                headers: myHeaders, 
+                body: raw, 
+                redirect: 'follow'
+            };
+            let response = await fetch("http://localhost:3000/animes/new", requestOptions);
+            let data = await response.json();
+            if(data.code == 201){
+                alert('Anime guardado con éxito')
+                formAgregar.reset();
+                document.location.href="/home";
+            } else {
+                throw new Error('Error al intentar guardar el anime en la DB')
+            }
+        } catch (error) { 
+            alert(error.message)
+        }
+    })
+</script>

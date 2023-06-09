@@ -1,0 +1,66 @@
+<div class='container'>
+	<h2 class='display-6 text-center mt-5'>
+		Actualiza un anime
+	</h2>
+	<form id='formActualizarAnime'>
+		<label class='form-label' for='animeId'>
+			ID
+		</label>
+		<input class='form-control mb-3' type='text' name='animeId' id='animeId' disabled value='{{anime.id}} '
+			required />
+
+		<label class='form-label' for='animeNombre'>
+			Nombre
+		</label>
+		<input class='form-control mb-3' type='text' name='animeNombre' id='animeNombre' value='{{anime.nombre}}'
+			required />
+
+		<label class='form-label' for='animeGenero'>
+			Genero
+		</label>
+		<input class='form-control mb-3' type='text' name='animeGenero' id='animeGenero' value='{{anime.genero}}'
+			required />
+		<label class='form-label' for='animeYear'>
+			Año
+		</label>
+		<input class='form-control mb-3' type='text' name='animeYear' id='animeYear' value='{{anime.year}}' required />
+
+		<label class='form-label' for='animeAutor'>
+			Autor
+		</label>
+		<input class='form-control mb-3' type='text' name='animeAutor' id='animeAutor' value='{{anime.autor}}'
+			required />
+		<div class='d-grid'>
+			<button class='btn btn-outline-primary' type='submit'>
+				Actualizar
+			</button>
+		</div>
+	</form>
+</div>
+<script>
+	let formActualizar = document.getElementById('formActualizarAnime');
+	formActualizar.addEventListener('submit', async (event) => {
+		event.preventDefault(); try {
+			const myHeaders = new Headers();
+			myHeaders.append("Content-Type", "application/json"); const raw =
+				JSON.stringify({
+					"id": animeId.value, "nombre": animeNombre.value, "genero":
+						animeGenero.value, "year": animeYear.value, "autor": animeAutor.value
+				}); let
+					response = await fetch("/animes/" + animeId.value, {
+						method: "PUT", headers:
+							myHeaders, body: raw, redirect: 'follow'
+					}); let data = await response.json();
+			if (data.code == 200) {
+				alert('Anime actualizado con éxito');
+				formActualizar.reset(); document.location.href = "/home";
+			} else {
+				throw new
+					Error('Error al actualizar el anime')
+			}
+		} catch (error) {
+			console.log(error);
+			alert(error.message)
+		}
+	})
+</script>

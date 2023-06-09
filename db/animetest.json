@@ -1,0 +1,39 @@
+{
+    "animes": [
+        {
+            "nombre": "Akira",
+            "genero": "Seinen",
+            "year": "1988",
+            "autor": "Katsuhiro Otomo",
+            "id": "1"
+        },
+        {
+            "nombre": "Dragon Ball",
+            "genero": "Shonen",
+            "year": "1986",
+            "autor": "Akira Toriyama",
+            "id": "2"
+        },
+        {
+            "nombre": "Sailor Moon",
+            "genero": "Shojo",
+            "year": "1992",
+            "autor": "Naoko Takeuchi",
+            "id": "3"
+        },
+        {
+            "nombre": "Naruto",
+            "genero": "Shonen",
+            "year": "2002",
+            "autor": "Masashi Kishimoto",
+            "id": "4"
+        },
+        {
+            "nombre": "Neon Genesis Evangelion",
+            "genero": "Mecha",
+            "year": "1995",
+            "autor": "Yoshiyuki Sadamoto",
+            "id": "5"
+        }
+    ]
+}
